@@ -2,51 +2,111 @@
 set number
 set mouse=a
 set autoindent
-set tabstop=4
+set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set smarttab 
 set encoding=UTF-8
 
+set omnifunc=syntaxcomplete#Complete
+
+set omnifunc=javascriptcompleteCompleteJS
+set omnifunc=htmlcomplete
+set omnifunc=csscomplete
+
+filetype on "Enable file type detction
+filetype indent on "Load an indent file for the detceted file type
+syntax on "Turn on synatx highliting
+set cursorline "Highlight cursor line
+set incsearch "Highlight search string matches
+set ignorecase "Ignore case senstivity during search
+set smartcase "Override the ignore case setting when searching for capital letters
+set showcmd "Show partial command in the last line of the screen
+set showmode "Show the mode on the last line of the screen
+
+"Enable plugin and load plugin for the detected file type
+filetype plugin on
+"Enable omnicomplete features
 
 "configure emmet
-
-let g:user_emmet_install_global = 0
-let g:user_emmet_leader_key='<C-r>'
+"let g:user_emmet_install_global = 0
+"let g:user_emmet_leader_key='<C-r>'
 
 
 
 " plugins 
+
 call plug#begin('~/.vim/plugged')
-Plug 'mattn/emmet-vim' "Enable emmet featerues to html /css like ! Currently not working 
+" + Plug 'mattn/emmet-vim' "Enable emmet featerues to html /css like ! Currently not working 
 Plug 'voldikss/vim-floaterm' "Open floating terminal
-Plug 'junegunn/vim-easy-align'
+
+" ====note + means currenly removed======
+" + Plug 'junegunn/vim-easy-align'
 "Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'https://github.com/preservim/nerdtree' " NerdTree
 "Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
-Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
+" + Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
 "Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 "Plug 'https://github.com/rstacruz/vim-closer' " For brackets autocompletion
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
-Plug 'wuelnerdotexe/vim-astro'
-"Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}  
-Plug 'nvim-telescope/telescope.nvim' "File Previewer
+" + Plug 'wuelnerdotexe/vim-astro'
 " Plugins for React and Tailwind CSS
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'dense-analysis/ale' "This will provide linting and check syntax error in my code in react
+"Plug 'neoclide/coc.nvim' "This will auto complte react typeing . 
+" + Plug 'ctrlpvim/ctrlp.vim' "This is fuzzy finder it provid file finder
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
+
+
+" ---- start
+
+" Auto-close tags and brackets
+Plug 'Townk/vim-autoclose'
+
+" Extra syntax highlighting
+Plug 'sheerun/vim-polyglot'
+
+" vim-surround for surrounding pairs
+Plug 'tpope/vim-surround'
+
+" vim-closetag for auto-closing HTML tags
+Plug 'alvan/vim-closetag'
+
+" vim-vsnip for snippets
+Plug 'hrsh7th/vim-vsnip'
+
+" Optional: UltiSnips for more advanced snippet management
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end()
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" Configuration for vim-closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.js,*.ts,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.ts,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,jsx,js,ts,tsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,js,ts,tsx'
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
+
+" Configuration for vim-vsnip
+let g:vsnip_snippet_dir = expand('~/.vim/vsnippets')
+
+" Optional: Configuration for UltiSnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<c-b>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
+
+" ---- end
+
+
 
 " Enable vim-jsx-pretty and vim-tailwindcss
-autocmd FileType javascript,typescript,jsx,tsx setlocal tsx
+"autocmd FileType javascript,typescript,jsx,tsx setlocal tsx
 
 "nerd maps enable when nerd maps are enabled =====
 "nnoremap cf :NERDTreeFocus<CR>
@@ -150,3 +210,18 @@ nnoremap Aj :m .+1<CR>==
 "      \ CheckBackspace() ? "\<Tab>" :
 "     \ coc#refresh()
 " Comment end in here
+
+
+" for tailwind
+
+" Customize cursorline appearance
+"highlight CursorLine cterm=bold ctermbg=blue guibg=#FFCCCC
+"highlight CursorLine cterm=NONE ctermbg=236 guibg=#D6D2D2
+"highlight CursorLine cterm=NONE ctermbg=236 guibg=#D2D2
+"highlight CursorLine guibg=white guifg=black ctermbg=white ctermfg=black
+
+" Customize cursorline appearance with a red background color and light gray texture
+
+"highlight CursorLine guibg=lightgray ctermbg=gray
+
+highlight CursorLine cterm=bold ctermbg=black guibg=#3c3836 "WorkingCurrent
